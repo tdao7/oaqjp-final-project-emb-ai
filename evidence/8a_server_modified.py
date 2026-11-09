@@ -1,21 +1,20 @@
-"""Serve the emotion detection web application with Flask."""
+"""Flask web server for the IBM Watson Emotion Detection project."""
 
 from flask import Flask, render_template, request
-
-from EmotionDetection import emotion_detector
+from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def home():
-    """Render the project's browser interface."""
+    """Render the project page."""
     return render_template("index.html")
 
 
 @app.route("/emotionDetector")
 def detect_emotion():
-    """Analyze the supplied text and display a human-readable result."""
+    """Display Watson emotion scores or a readable invalid-input message."""
     text_to_analyze = request.args.get("textToAnalyze", "")
     if not text_to_analyze.strip():
         return "Invalid text! Please try again!", 400
@@ -36,4 +35,4 @@ def detect_emotion():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5000)

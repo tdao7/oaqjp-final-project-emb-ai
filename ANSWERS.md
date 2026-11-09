@@ -1,15 +1,15 @@
 # Assignment answers: 16 fields
 
-**Important:** GitHub links shown here are proposed paths, not existing URLs. This environment has read/write access to two unrelated **private** repositories, but cannot create a new **public fork** on `tdao7`. Do not paste the links into the final submission until they are live.
+**Retake update:** The public fork at `https://github.com/tdao7/oaqjp-final-project-emb-ai` exists (and Questions 1 & 6 were awarded full marks). The corrected files in this ZIP must be pushed before their public URLs show the fix. The current GitHub integration returned HTTP 403 for writes; run `bash apply_fixes_tdao7.sh` from your local machine after Git authentication.
 
-**Verification performed:** 7 unit tests passed with HTTP responses mocked. The Watson NLP endpoint could not be reached here; Flask and pylint are not installed. Browser screenshots under `evidence/` are explicitly offline previews and are *not actual deployment evidence*.
+**Verification performed:** 7 existing unit tests and 2 retake checks passed locally. IBM Watson was not reachable here, and Flask/Pylint were not installed. Browser screenshots under `evidence/` remain **offline previews**, not deployment evidence; run `bash run_in_ibm_lab.sh` inside IBM Lab to obtain actual output and screenshots.
 
 ## Question 1 (URL)
 
-Expected public fork URL after you run publish_tdao7.sh and verify the repo is public:
+Verified public repository URL:
 https://github.com/tdao7/oaqjp-final-project-emb-ai/blob/main/README.md
 
-STATUS: NOT YET PUBLISHED. Do not submit this URL before publication.
+STATUS: 1/1 in grading. Keep this URL unchanged.
 
 ---
 
@@ -22,7 +22,7 @@ import requests
 
 
 def emotion_detector(text_to_analyze):
-    """Return the initial raw Watson HTTP JSON response."""
+    """Return the initial raw Watson HTTP response text."""
     url = (
         "https://sn-watson-emotion.labs.skills.network/"
         "v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
@@ -31,36 +31,15 @@ def emotion_detector(text_to_analyze):
     payload = {"raw_document": {"text": text_to_analyze}}
     response = requests.post(url, json=payload, headers=headers, timeout=15)
     response.raise_for_status()
-    return response.json()
+    return response.text
 ```
 
 ---
 
-## Question 3 (TEXT)
+## Question 3 (TEXT — actual IBM Lab output required)
 
-```text
-OFFLINE EXAMPLE MODE (NOT IBM WATSON OUTPUT); working directory: /mnt/data/oaqjp-final-project-emb-ai
-$ EMOTION_DETECTION_MOCK=1 python3 -c 'from emotion_detection import emotion_detector; print(emotion_detector("I am really mad about this"))'
-{'anger': 0.88, 'disgust': 0.03, 'fear': 0.03, 'joy': 0.03, 'sadness': 0.03, 'dominant_emotion': 'anger'}
-
-
-
-Additional actual local unit-test output (mocked HTTP, not live Watson):
-$ python3 test_emotion_detection.py
-test_anger (test_emotion_detection.TestEmotionDetection.test_anger)
-Anger must be selected for its corresponding prediction. ... ok
-test_blank_text (test_emotion_detection.TestEmotionDetection.test_blank_text)
-Blank text is rejected without contacting Watson. ... ok
-test_disgust (test_emotion_detection.TestEmotionDetection.test_disgust)
-Disgust must be selected for its corresponding prediction. ... ok
-test_fear (test_emotion_detection.TestEmotionDetection.test_fear)
-Fear must be selected for its corresponding prediction. ... ok
-test_http_400 (test_emotion_detection.TestEmotionDetection.test_http_400)
-Watson 400 returns None for all fields, including dominant emotion. ... ok
-test_joy (test_emotion_detection.TestEmotionDetection.test_joy)
-Joy must be selected for its corresponding prediction. ... ok
-test_sadness (test_emotion_detection.TestEmotionDetection.test_sadness)
-Sadness must be selected for its corresponding prediction. ... ok
+The previous submission received 0 because it was an **offline mock at the wrong path**.
+Run `bash run_in_ibm_lab.sh` in the IBM Lab after the files are updated, then paste the **actual terminal transcript** from `evidence/2b_application_creation.txt`. It must show `/home/project/final_project`, `python3`, the exact `from emotion_detection import emotion_detector` import, `print(emotion_detector('I am really mad about this'))`, `exit()`, and `python3 test_emotion_detection.py`. Do not substitute fabricated Watson response data.
 
 ----------------------------------------------------------------------
 Ran 7 tests in 0.003s
@@ -162,10 +141,10 @@ $ EMOTION_DETECTION_MOCK=1 python3 -c 'from EmotionDetection import emotion_dete
 
 ## Question 6 (URL)
 
-Expected public fork URL after you run publish_tdao7.sh and verify the repo is public:
+Verified public repository URL:
 https://github.com/tdao7/oaqjp-final-project-emb-ai/blob/main/EmotionDetection/__init__.py
 
-STATUS: NOT YET PUBLISHED. Do not submit this URL before publication.
+STATUS: 1/1 in grading. Keep this URL unchanged.
 
 ---
 
@@ -299,7 +278,7 @@ OK
 
 from flask import Flask, render_template, request
 
-from EmotionDetection import emotion_detector
+from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
@@ -333,7 +312,7 @@ def detect_emotion():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5000)
 ```
 
 ---
@@ -429,7 +408,7 @@ def emotion_detector(text_to_analyze):
 
 from flask import Flask, render_template, request
 
-from EmotionDetection import emotion_detector
+from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
@@ -463,7 +442,7 @@ def detect_emotion():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5000)
 ```
 
 ---
@@ -481,7 +460,7 @@ REQUIRES ACTUAL SCREENSHOT: `7c_error_handling_interface.png` of Flask web app r
 
 from flask import Flask, render_template, request
 
-from EmotionDetection import emotion_detector
+from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask(__name__)
 
@@ -515,18 +494,13 @@ def detect_emotion():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5000)
 ```
 
 ---
 
-## Question 16 (TEXT)
+## Question 16 (TEXT — actual Pylint output required)
 
-```text
-Pylint could not be run in this environment (pylint package not available).
-Run in IBM Lab: python3 -m pylint server.py
-Actual local attempt exit code: 1
-/opt/pyvenv/bin/python: No module named pylint
-```
+After running `bash run_in_ibm_lab.sh` in the IBM Lab, paste the contents of `evidence/8b_static_code_analysis.txt` containing the **actual** `pylint server.py` report and score. The assignment expects 10.00/10. Do not claim that score before the command actually reports it.
 
 ---
