@@ -1,0 +1,1 @@
+REQUIRES ACTUAL SCREENSHOT: `6b_deployment_test.png` of Flask web application running in IBM Lab and correctly displaying an emotion prediction. A separate `6b_deployment_preview.png` is only an OFFLINE UI MOCK preview and is NOT proof of deployment.

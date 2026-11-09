@@ -1,32 +1,43 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="./static/mywebscript.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NLP - Emotion Detection</title>
+    <script src="{{ url_for('static', filename='mywebscript.js') }}" defer></script>
     <style>
-        .center-heading {
-            text-align: center;
-        }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 60px 20px; background: #f5f6fa; color: #25334a;
+               font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+        .card { background: white; width: min(820px, 100%); margin: auto; border-radius: 16px;
+                box-shadow: 0 8px 34px rgba(30, 40, 60, .09); padding: 40px; }
+        h1 { font-size: 30px; text-align: center; margin: 0 0 12px; }
+        .subtitle { color: #64748b; text-align: center; margin-bottom: 40px; }
+        label { font-weight: 600; display: block; margin-bottom: 12px; }
+        textarea { width: 100%; padding: 15px; font: inherit; border-radius: 10px; resize: vertical;
+                   border: 1px solid #cbd5e1; min-height: 115px; }
+        textarea:focus { outline: 2px solid #a5b4fc; }
+        button { margin-top: 20px; color: white; background: #334155; border: 0;
+                 border-radius: 9px; padding: 13px 22px; font: inherit; cursor: pointer; }
+        button:hover { background: #1e293b; }
+        .result { margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0; }
+        #system_response { margin-top: 10px; min-height: 72px; padding: 16px;
+                           background: #f8fafc; border-radius: 9px; line-height: 1.65;
+                           overflow-wrap: anywhere; }
+        .note { font-size: 12px; color: #64748b; margin-top: 24px; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="card-body">
-            <h1 class="center-heading">NLP - Emotion Detection</h1> 
-            <div style="padding: 25px 25px 25px 25px;">
-            <h2 class="mb-3">
-                <label class="form-label">Please enter the text to be analyzed</label>
-                <input type="textarea" class="form-control" id="textToAnalyze">
-            </h2>
-
-            <div style="padding: 25px 25px 25px 25px;">
-                <button onclick="RunSentimentAnalysis()" class="btn btn-secondary">Run Sentiment Analysis</button>
-            </div>
-            <div style="padding: 25px 25px 25px 25px;"></div>
-            <h2 class="mb-3">
-                <label class="form-label">Result of Emotion Detection</label>
-            </h2>
-
-            <div id="system_response" style="padding: 25px 25px 25px 25px;"></div>
+    <main class="card">
+        <h1>NLP - Emotion Detection</h1>
+        <p class="subtitle">Analyze the five key emotions expressed in a sentence.</p>
+        <label for="textToAnalyze">Please enter the text to be analyzed</label>
+        <textarea id="textToAnalyze" placeholder="For example: I am so happy today!"></textarea>
+        <button onclick="RunSentimentAnalysis()">Run Sentiment Analysis</button>
+        <div class="result">
+            <label>Result of Emotion Detection</label>
+            <div id="system_response" aria-live="polite"></div>
         </div>
-    </div>
+    </main>
 </body>
+</html>

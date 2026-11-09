@@ -1,12 +1,22 @@
-let RunSentimentAnalysis = ()=>{
-    textToAnalyze = document.getElementById("textToAnalyze").value;
+/* Connect the IBM starter HTML to the Flask /emotionDetector route. */
+function RunSentimentAnalysis() {
+    const textToAnalyze = document.getElementById("textToAnalyze").value;
+    const systemResponse = document.getElementById("system_response");
 
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("system_response").innerHTML = xhttp.responseText;
-        }
-    };
-    xhttp.open("GET", "emotionDetector?textToAnalyze"+"="+textToAnalyze, true);
-    xhttp.send();
+    if (!textToAnalyze.trim()) {
+        systemResponse.textContent = "Invalid text! Please try again!";
+        return;
+    }
+
+    fetch("/emotionDetector?textToAnalyze=" + encodeURIComponent(textToAnalyze))
+        .then((response) => response.text().then((text) => ({
+            ok: response.ok,
+            text: text,
+        })))
+        .then((result) => {
+            systemResponse.textContent = result.text;
+        })
+        .catch(() => {
+            systemResponse.textContent = "Service unavailable. Please try again.";
+        });
 }

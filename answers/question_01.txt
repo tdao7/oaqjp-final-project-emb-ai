@@ -1,0 +1,4 @@
+Expected public fork URL after you run publish_tdao7.sh and verify the repo is public:
+https://github.com/tdao7/oaqjp-final-project-emb-ai/blob/main/README.md
+
+STATUS: NOT YET PUBLISHED. Do not submit this URL before publication.

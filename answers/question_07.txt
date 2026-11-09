@@ -1,0 +1,5 @@
+OFFLINE EXAMPLE MODE (NOT IBM WATSON OUTPUT); working directory: /mnt/data/oaqjp-final-project-emb-ai
+$ EMOTION_DETECTION_MOCK=1 python3 -c 'from EmotionDetection.emotion_detection import emotion_detector; print(emotion_detector("I am very angry"))'
+{'anger': 0.88, 'disgust': 0.03, 'fear': 0.03, 'joy': 0.03, 'sadness': 0.03, 'dominant_emotion': 'anger'}
+
+This is not a live Watson result; run on IBM Lab for authentic output.

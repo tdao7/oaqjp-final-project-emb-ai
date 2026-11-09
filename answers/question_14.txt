@@ -1,0 +1,1 @@
+REQUIRES ACTUAL SCREENSHOT: `7c_error_handling_interface.png` of Flask web app rejecting blank input in IBM Lab. `7c_error_handling_preview.png` is only an OFFLINE UI MOCK preview and is NOT proof of deployment.

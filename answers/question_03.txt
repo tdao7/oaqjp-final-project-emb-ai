@@ -1,0 +1,27 @@
+OFFLINE EXAMPLE MODE (NOT IBM WATSON OUTPUT); working directory: /mnt/data/oaqjp-final-project-emb-ai
+$ EMOTION_DETECTION_MOCK=1 python3 -c 'from emotion_detection import emotion_detector; print(emotion_detector("I am really mad about this"))'
+{'anger': 0.88, 'disgust': 0.03, 'fear': 0.03, 'joy': 0.03, 'sadness': 0.03, 'dominant_emotion': 'anger'}
+
+This is NOT the /home/project/final_project terminal output requested by the grading rubric. Re-run on IBM Lab.
+
+Additional actual local unit-test output (mocked HTTP, not live Watson):
+$ python3 test_emotion_detection.py
+test_anger (test_emotion_detection.TestEmotionDetection.test_anger)
+Anger must be selected for its corresponding prediction. ... ok
+test_blank_text (test_emotion_detection.TestEmotionDetection.test_blank_text)
+Blank text is rejected without contacting Watson. ... ok
+test_disgust (test_emotion_detection.TestEmotionDetection.test_disgust)
+Disgust must be selected for its corresponding prediction. ... ok
+test_fear (test_emotion_detection.TestEmotionDetection.test_fear)
+Fear must be selected for its corresponding prediction. ... ok
+test_http_400 (test_emotion_detection.TestEmotionDetection.test_http_400)
+Watson 400 returns None for all fields, including dominant emotion. ... ok
+test_joy (test_emotion_detection.TestEmotionDetection.test_joy)
+Joy must be selected for its corresponding prediction. ... ok
+test_sadness (test_emotion_detection.TestEmotionDetection.test_sadness)
+Sadness must be selected for its corresponding prediction. ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.003s
+
+OK
